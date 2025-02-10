@@ -50,8 +50,8 @@ An interactive platform for learning programming languages through gamification 
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/code-learning-platform.git
-cd code-learning-platform
+git clone https://github.com/suctuk/codelingo.git
+cd codelingo
 ```
 
 2. Install dependencies:

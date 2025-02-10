@@ -28,3 +28,4 @@
   *.swo
   *.swn
   .DS_Store
+node_modules
