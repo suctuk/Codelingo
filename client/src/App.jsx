@@ -6,6 +6,8 @@ import AppLayout from './components/layout/AppLayout';
 import Home from './pages/Home';
 import Learn from './pages/Learn';
 import Profile from './pages/Profile';
+import Login from './pages/Login';
+import Register from './pages/Register';
 import PrivateRoute from './components/auth/PrivateRoute';
 
 const App = () => {
@@ -52,8 +54,3 @@ const App = () => {
 };
 
 export default App;
-
-
-
-
-

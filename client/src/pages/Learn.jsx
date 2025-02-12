@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import LearningPath from '../components/learning/LearningPath';
-import { Alert } from '@/components/ui/alert';
+import Alert from '../components/ui/alert';
 
 const Learn = () => {
   const { language } = useParams();
@@ -14,7 +14,7 @@ const Learn = () => {
   }, [language]);
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <Alert variant="destructive">{error}</Alert>;
+  if (error) return <Alert type="error" message={error} />;
 
   return (
     <div className="container mx-auto py-6">

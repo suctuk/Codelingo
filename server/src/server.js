@@ -3,10 +3,12 @@ const app = require('./app');
 const http = require('http');
 const socketIo = require('socket.io');
 
+const PORT = process.env.PORT || 3001;
+
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: process.env.FRONTEND_URL,
+    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
     methods: ['GET', 'POST']
   }
 });
@@ -40,8 +42,6 @@ io.on('connection', (socket) => {
     console.log('Client disconnected');
   });
 });
-
-const PORT = process.env.PORT || 3000;
 
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
