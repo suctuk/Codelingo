@@ -72,87 +72,351 @@ export interface LanguagePairCurriculum {
   };
 }
 
-// Standard section template for all language pairs
+// Comprehensive curriculum sections for all language pairs
 export const standardSections = [
   {
-    id: 'section_1_basics',
-    title: 'Language Basics',
+    id: 'section_1_fundamentals',
+    title: 'Programming Fundamentals',
+    description: 'Learn the basic building blocks of programming',
     units: [
-      { id: 'unit_1_output', title: 'Console Output', lessons: 10 },
-      { id: 'unit_2_variables', title: 'Variables and Types', lessons: 10 },
-      { id: 'unit_3_operators', title: 'Basic Operators', lessons: 10 },
-      { id: 'unit_4_strings', title: 'String Operations', lessons: 10 },
-      // ... more units
+      { 
+        id: 'unit_1_1_output',
+        title: 'Console Output',
+        description: 'Learn to display text and values',
+        lessons: [
+          'Hello World',
+          'Print Multiple Lines',
+          'Print Variables',
+          'String Formatting',
+          'Special Characters',
+          'Print Numbers',
+          'Print Boolean Values',
+          'Print Arrays/Lists',
+          'Error Messages',
+          'Debug Output'
+        ]
+      },
+      {
+        id: 'unit_1_2_comments',
+        title: 'Comments and Documentation',
+        description: 'Document your code effectively',
+        lessons: [
+          'Single Line Comments',
+          'Multi-line Comments',
+          'Documentation Comments',
+          'Code Organization',
+          'Best Practices',
+          'Commenting Style',
+          'Documentation Standards',
+          'TODO Comments',
+          'Function Documentation',
+          'Class Documentation'
+        ]
+      },
+      {
+        id: 'unit_1_3_variables',
+        title: 'Variables and Data Types',
+        description: 'Store and manipulate different types of data',
+        lessons: [
+          'Variable Declaration',
+          'Numbers and Math',
+          'Text and Strings',
+          'Boolean Logic',
+          'Constants',
+          'Type Conversion',
+          'Multiple Variables',
+          'Naming Conventions',
+          'Scope Rules',
+          'Memory Management'
+        ]
+      }
     ]
   },
   {
-    id: 'section_2_control_flow',
+    id: 'section_2_operations',
+    title: 'Basic Operations',
+    description: 'Master fundamental programming operations',
+    units: [
+      {
+        id: 'unit_2_1_arithmetic',
+        title: 'Arithmetic Operations',
+        description: 'Perform mathematical calculations',
+        lessons: [
+          'Basic Math',
+          'Order of Operations',
+          'Integer Division',
+          'Floating Point Math',
+          'Math Functions',
+          'Random Numbers',
+          'Number Systems',
+          'Bitwise Operations',
+          'Complex Numbers',
+          'Scientific Notation'
+        ]
+      },
+      {
+        id: 'unit_2_2_strings',
+        title: 'String Operations',
+        description: 'Manipulate text and strings',
+        lessons: [
+          'String Concatenation',
+          'String Methods',
+          'Substrings',
+          'String Search',
+          'Case Manipulation',
+          'String Validation',
+          'Regular Expressions',
+          'String Formatting',
+          'Unicode Handling',
+          'Template Strings'
+        ]
+      }
+    ]
+  },
+  {
+    id: 'section_3_control',
     title: 'Control Flow',
+    description: 'Control program execution flow',
     units: [
-      { id: 'unit_1_conditionals', title: 'If Statements', lessons: 10 },
-      { id: 'unit_2_loops', title: 'Loops and Iterations', lessons: 10 },
-      { id: 'unit_3_switch', title: 'Switch and Pattern Matching', lessons: 10 },
-      // ... more units
+      {
+        id: 'unit_3_1_conditionals',
+        title: 'Conditional Statements',
+        description: 'Make decisions in your code',
+        lessons: [
+          'If Statements',
+          'Else Clauses',
+          'Multiple Conditions',
+          'Switch Statements',
+          'Pattern Matching',
+          'Ternary Operators',
+          'Nested Conditions',
+          'Short Circuit Logic',
+          'Guard Clauses',
+          'Best Practices'
+        ]
+      },
+      {
+        id: 'unit_3_2_loops',
+        title: 'Loops and Iterations',
+        description: 'Repeat actions efficiently',
+        lessons: [
+          'For Loops',
+          'While Loops',
+          'Loop Control',
+          'Nested Loops',
+          'Iterators',
+          'List Comprehension',
+          'Loop Optimization',
+          'Infinite Loops',
+          'Break and Continue',
+          'Loop Patterns'
+        ]
+      }
     ]
   },
   {
-    id: 'section_3_functions',
+    id: 'section_4_functions',
     title: 'Functions and Methods',
+    description: 'Create reusable code blocks',
     units: [
-      { id: 'unit_1_basics', title: 'Function Basics', lessons: 10 },
-      { id: 'unit_2_parameters', title: 'Parameters and Returns', lessons: 10 },
-      { id: 'unit_3_advanced', title: 'Advanced Functions', lessons: 10 },
-      // ... more units
+      {
+        id: 'unit_4_1_basics',
+        title: 'Function Basics',
+        description: 'Learn to create and use functions',
+        lessons: [
+          'Function Declaration',
+          'Parameters',
+          'Return Values',
+          'Default Arguments',
+          'Named Arguments',
+          'Variable Arguments',
+          'Scope Rules',
+          'Pure Functions',
+          'Side Effects',
+          'Documentation'
+        ]
+      },
+      {
+        id: 'unit_4_2_advanced',
+        title: 'Advanced Functions',
+        description: 'Master advanced function concepts',
+        lessons: [
+          'Anonymous Functions',
+          'Higher Order Functions',
+          'Closures',
+          'Decorators',
+          'Generators',
+          'Async Functions',
+          'Recursion',
+          'Memoization',
+          'Function Composition',
+          'Error Handling'
+        ]
+      }
     ]
   },
   {
-    id: 'section_4_data_structures',
+    id: 'section_5_data_structures',
     title: 'Data Structures',
+    description: 'Organize and manage data efficiently',
     units: [
-      { id: 'unit_1_arrays', title: 'Arrays and Lists', lessons: 10 },
-      { id: 'unit_2_maps', title: 'Maps and Dictionaries', lessons: 10 },
-      { id: 'unit_3_sets', title: 'Sets', lessons: 10 },
-      // ... more units
+      {
+        id: 'unit_5_1_arrays',
+        title: 'Arrays and Lists',
+        description: 'Work with sequential data',
+        lessons: [
+          'Array Basics',
+          'List Operations',
+          'Sorting',
+          'Searching',
+          'Filtering',
+          'Mapping',
+          'Reducing',
+          'Multi-dimensional Arrays',
+          'Array Methods',
+          'Performance'
+        ]
+      },
+      {
+        id: 'unit_5_2_collections',
+        title: 'Collections',
+        description: 'Use specialized data structures',
+        lessons: [
+          'Sets',
+          'Dictionaries',
+          'Tuples',
+          'Queues',
+          'Stacks',
+          'Hash Tables',
+          'Linked Lists',
+          'Trees',
+          'Graphs',
+          'Custom Collections'
+        ]
+      }
     ]
   },
   {
-    id: 'section_5_oop',
+    id: 'section_6_oop',
     title: 'Object-Oriented Programming',
+    description: 'Design with classes and objects',
     units: [
-      { id: 'unit_1_classes', title: 'Classes and Objects', lessons: 10 },
-      { id: 'unit_2_inheritance', title: 'Inheritance', lessons: 10 },
-      { id: 'unit_3_interfaces', title: 'Interfaces and Abstract Classes', lessons: 10 },
-      // ... more units
-    ]
-  },
-  {
-    id: 'section_6_error_handling',
-    title: 'Error Handling',
-    units: [
-      { id: 'unit_1_exceptions', title: 'Exceptions', lessons: 10 },
-      { id: 'unit_2_try_catch', title: 'Try-Catch Blocks', lessons: 10 },
-      { id: 'unit_3_custom', title: 'Custom Exceptions', lessons: 10 },
-      // ... more units
+      {
+        id: 'unit_6_1_classes',
+        title: 'Classes and Objects',
+        description: 'Create object-oriented code',
+        lessons: [
+          'Class Definition',
+          'Constructor Methods',
+          'Instance Variables',
+          'Class Methods',
+          'Static Methods',
+          'Properties',
+          'Access Control',
+          'Method Overloading',
+          'Operator Overloading',
+          'Class Composition'
+        ]
+      },
+      {
+        id: 'unit_6_2_inheritance',
+        title: 'Inheritance and Polymorphism',
+        description: 'Extend and modify class behavior',
+        lessons: [
+          'Basic Inheritance',
+          'Method Override',
+          'Abstract Classes',
+          'Interfaces',
+          'Multiple Inheritance',
+          'Mixins',
+          'Method Resolution',
+          'Duck Typing',
+          'Design Patterns',
+          'Best Practices'
+        ]
+      }
     ]
   },
   {
     id: 'section_7_advanced',
     title: 'Advanced Topics',
+    description: 'Master advanced programming concepts',
     units: [
-      { id: 'unit_1_generics', title: 'Generics', lessons: 10 },
-      { id: 'unit_2_async', title: 'Asynchronous Programming', lessons: 10 },
-      { id: 'unit_3_functional', title: 'Functional Programming', lessons: 10 },
-      // ... more units
+      {
+        id: 'unit_7_1_async',
+        title: 'Asynchronous Programming',
+        description: 'Handle concurrent operations',
+        lessons: [
+          'Callbacks',
+          'Promises',
+          'Async/Await',
+          'Event Loop',
+          'Concurrency',
+          'Parallel Processing',
+          'Workers',
+          'Race Conditions',
+          'Error Handling',
+          'Best Practices'
+        ]
+      },
+      {
+        id: 'unit_7_2_modules',
+        title: 'Modules and Packages',
+        description: 'Organize and share code',
+        lessons: [
+          'Module Basics',
+          'Import/Export',
+          'Package Management',
+          'Dependency Handling',
+          'Module Patterns',
+          'Circular Dependencies',
+          'Module Loading',
+          'Package Creation',
+          'Distribution',
+          'Version Control'
+        ]
+      }
     ]
   },
   {
     id: 'section_8_projects',
-    title: 'Practical Projects',
+    title: 'Real-World Projects',
+    description: 'Apply your skills to practical projects',
     units: [
-      { id: 'unit_1_cli', title: 'Command Line App', lessons: 10 },
-      { id: 'unit_2_api', title: 'API Development', lessons: 10 },
-      { id: 'unit_3_gui', title: 'GUI Application', lessons: 10 },
-      // ... more units
+      {
+        id: 'unit_8_1_cli',
+        title: 'Command Line Applications',
+        description: 'Build CLI tools and utilities',
+        lessons: [
+          'Project Setup',
+          'Argument Parsing',
+          'File Operations',
+          'User Input',
+          'Progress Indicators',
+          'Error Handling',
+          'Configuration',
+          'Logging',
+          'Testing',
+          'Distribution'
+        ]
+      },
+      {
+        id: 'unit_8_2_web',
+        title: 'Web Applications',
+        description: 'Create web-based projects',
+        lessons: [
+          'HTTP Basics',
+          'API Design',
+          'Data Storage',
+          'Authentication',
+          'Request Handling',
+          'Response Formatting',
+          'Error Handling',
+          'Security',
+          'Performance',
+          'Deployment'
+        ]
+      }
     ]
   }
 ];

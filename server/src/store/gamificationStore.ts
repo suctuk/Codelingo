@@ -1,6 +1,14 @@
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
 
+interface Achievement {
+  id: string;
+  title: string;
+  description: string;
+  achieved: boolean;
+  date?: string;
+}
+
 interface GamificationState {
   xp: number;
   streak: number;
@@ -14,13 +22,7 @@ interface GamificationState {
   unlockedLessons: string[];
   completedLessons: string[];
   goldenLessons: string[]; // Lessons with 5 crowns
-  achievements: {
-    id: string;
-    title: string;
-    description: string;
-    achieved: boolean;
-    date?: string;
-  }[];
+  achievements: Achievement[];
   
   // Actions
   addXP: (amount: number) => void;

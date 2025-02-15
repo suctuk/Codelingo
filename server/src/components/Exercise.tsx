@@ -158,10 +158,12 @@ export const Exercise: React.FC<ExerciseProps> = ({
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const [timeLeft, setTimeLeft] = useState(exercise.timeLimit);
+
   const [timer] = useState(() => new ExerciseTimer({
     defaultTime: exercise.timeLimit,
     warningTime: 10,
-    onTick: () => {},
+    onTick: (time) => setTimeLeft(time),
     onTimeUp: () => {
       if (selectedAnswer === null) {
         handleAnswerSelect('');
@@ -181,6 +183,7 @@ export const Exercise: React.FC<ExerciseProps> = ({
     setSelectedAnswer(answer);
     const correct = answer === exercise.correctAnswer;
     setIsCorrect(correct);
+    timer.stop();
     
     if (!correct) {
       onHeartLost();
@@ -193,7 +196,7 @@ export const Exercise: React.FC<ExerciseProps> = ({
 
   return (
     <Container>
-      <ProgressBar $progress={(exercise.timeLimit - timer.getTimeLeft()) / exercise.timeLimit * 100} />
+      <ProgressBar $progress={(exercise.timeLimit - timeLeft) / exercise.timeLimit * 100} />
       
       <TopBar>
         <Hearts>
@@ -206,10 +209,10 @@ export const Exercise: React.FC<ExerciseProps> = ({
           ))}
         </Hearts>
         <Timer 
-          $warning={timer.getTimeLeft() <= 10}
-          data-testid="exercise-timer"
+          $warning={timeLeft <= 10}
+          data-testid="timer"
         >
-          {timer.getTimeLeft()}s
+          {timeLeft}s
         </Timer>
       </TopBar>
 

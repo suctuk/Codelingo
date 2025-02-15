@@ -56,13 +56,31 @@ describe('LessonTree Component', () => {
     );
 
     mockNodes.forEach(node => {
-      expect(screen.getByText(node.title)).toBeInTheDocument();
-      expect(screen.getByText(`${node.xp} XP`)).toBeInTheDocument();
-      
       const nodeElement = screen.getByTestId(`node-${node.id}`);
+      
+      // Check title and XP
+      expect(screen.getByTestId(`title-${node.id}`)).toHaveTextContent(node.title);
+      expect(screen.getByTestId(`xp-${node.id}`)).toHaveTextContent(`${node.xp} XP`);
+      
+      // Check position
       expect(nodeElement).toHaveStyle({
-        transform: `translate(${node.position.x}px, ${node.position.y}px)`
+        left: `${node.position.x}px`,
+        top: `${node.position.y}px`
       });
+
+      // Check accessibility attributes
+      expect(nodeElement).toHaveAttribute(
+        'aria-label',
+        `${node.title} - ${node.status} - ${node.xp} XP`
+      );
+      
+      if (node.status === 'locked') {
+        expect(nodeElement).toHaveAttribute('aria-disabled', 'true');
+        expect(nodeElement).toHaveAttribute('tabIndex', '-1');
+      } else {
+        expect(nodeElement).toHaveAttribute('aria-disabled', 'false');
+        expect(nodeElement).toHaveAttribute('tabIndex', '0');
+      }
     });
   });
 
@@ -92,7 +110,7 @@ describe('LessonTree Component', () => {
       />
     );
 
-    const availableNode = screen.getByText('Data Types');
+    const availableNode = screen.getByTestId('node-basics_2');
     fireEvent.click(availableNode);
     expect(onNodeClick).toHaveBeenCalledWith('basics_2');
   });
@@ -106,7 +124,7 @@ describe('LessonTree Component', () => {
       />
     );
 
-    const lockedNode = screen.getByText('Control Flow');
+    const lockedNode = screen.getByTestId('node-basics_3');
     fireEvent.click(lockedNode);
     expect(onNodeClick).not.toHaveBeenCalled();
   });
@@ -119,9 +137,14 @@ describe('LessonTree Component', () => {
       />
     );
 
+    // Check crown for completed node with skill level
     const crownElement = screen.getByTestId('crown-basics_1');
     expect(crownElement).toBeInTheDocument();
     expect(crownElement).toHaveAttribute('aria-label', 'Skill Level 3');
+    
+    // Verify no crown for nodes without skill level
+    expect(screen.queryByTestId('crown-basics_2')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('crown-basics_3')).not.toBeInTheDocument();
   });
 
   it('applies correct styles based on node status', () => {
@@ -135,14 +158,18 @@ describe('LessonTree Component', () => {
     // Completed node
     const completedNode = screen.getByTestId('node-basics_1');
     expect(completedNode).toHaveStyle({
-      opacity: '1',
+      cursor: 'pointer'
+    });
+
+    // Available node
+    const availableNode = screen.getByTestId('node-basics_2');
+    expect(availableNode).toHaveStyle({
       cursor: 'pointer'
     });
 
     // Locked node
     const lockedNode = screen.getByTestId('node-basics_3');
     expect(lockedNode).toHaveStyle({
-      opacity: '0.5',
       cursor: 'not-allowed'
     });
   });

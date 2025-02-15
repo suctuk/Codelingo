@@ -8,18 +8,11 @@ module.exports = {
     '^styled-components$': '<rootDir>/src/__mocks__/styled-components.ts'
   },
   transform: {
-    '^.+\\.(ts|tsx)$': ['ts-jest', {
-      tsconfig: 'tsconfig.json'
-    }]
+    '^.+\\.(ts|tsx)$': 'ts-jest'
   },
   testMatch: [
     '<rootDir>/src/**/__tests__/**/*.{ts,tsx}',
     '<rootDir>/src/**/*.{spec,test}.{ts,tsx}'
   ],
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
-  globals: {
-    'ts-jest': {
-      tsconfig: 'tsconfig.json'
-    }
-  }
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node']
 };

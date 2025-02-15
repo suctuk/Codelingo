@@ -5,6 +5,10 @@ import { Exercise } from '../Exercise';
 import { ThemeProvider } from 'styled-components';
 import { codeTheme } from '../../styles/codeTheme';
 import { Exercise as ExerciseType } from '../../types';
+import { ExerciseTimer } from '../ExerciseTimer';
+
+// Mock ExerciseTimer
+jest.mock('../ExerciseTimer');
 
 const mockExercise: ExerciseType = {
   type: 'multipleChoice',
@@ -30,13 +34,21 @@ const renderWithTheme = (component: React.ReactElement) => {
 };
 
 describe('Exercise Component', () => {
+  let mockTimer: ExerciseTimer;
+
   beforeEach(() => {
-    jest.useFakeTimers();
+    mockTimer = new ExerciseTimer({
+      defaultTime: 30,
+      warningTime: 10,
+      onTick: jest.fn(),
+      onTimeUp: jest.fn(),
+      onWarning: jest.fn()
+    });
   });
 
   afterEach(() => {
-    jest.runOnlyPendingTimers();
-    jest.useRealTimers();
+    mockTimer.stop();
+    jest.clearAllMocks();
   });
 
   it('renders exercise prompt and code correctly', () => {
@@ -104,15 +116,16 @@ describe('Exercise Component', () => {
     );
 
     // Fast-forward timer to near expiration
-    jest.advanceTimersByTime(28000);
-    expect(screen.getByText('2s')).toBeInTheDocument();
+    for (let i = 0; i < 28; i++) {
+      mockTimer.mockTick();
+    }
 
     // Timer warning should appear
-    const timer = screen.getByText('2s');
-    expect(timer).toHaveStyle({ color: expect.stringContaining('warning') });
+    expect(screen.getByText('2')).toBeInTheDocument();
+    expect(screen.getByTestId('timer')).toHaveStyle({ color: expect.stringContaining('warning') });
 
     // Expire timer
-    jest.advanceTimersByTime(2000);
+    mockTimer.mockTimeUp();
     expect(onHeartLost).toHaveBeenCalled();
   });
 

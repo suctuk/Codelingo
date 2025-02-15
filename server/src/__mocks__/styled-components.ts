@@ -1,11 +1,25 @@
-import * as styled from 'styled-components';
+import React from 'react';
 
-// Mock styled-components
-const styled = (tag: any) => {
-  const styledComponent = (strings: TemplateStringsArray, ...args: any[]) => {
-    return tag;
+interface StyledComponent<P = any> extends React.ForwardRefExoticComponent<P> {
+  withConfig: (config: any) => StyledComponent<P>;
+  attrs: (attrs: any) => StyledComponent<P>;
+}
+
+const styled = (Component: string | React.ComponentType<any>) => {
+  const templateFunction = (strings?: TemplateStringsArray, ...args: any[]): StyledComponent => {
+    const StyledComponent = React.forwardRef((props: any, ref: any) => {
+      const ElementType = typeof Component === 'string' ? Component : Component;
+      return React.createElement(ElementType, { ...props, ref }, props.children);
+    }) as StyledComponent;
+
+    StyledComponent.displayName = `Styled(${typeof Component === 'string' ? Component : Component.displayName || Component.name || 'Component'})`;
+    StyledComponent.withConfig = () => StyledComponent;
+    StyledComponent.attrs = () => StyledComponent;
+
+    return StyledComponent;
   };
-  return styledComponent;
+
+  return templateFunction;
 };
 
 // Add all HTML and SVG elements
@@ -21,14 +35,16 @@ const domElements = [
   'ul', 'var', 'video', 'wbr', 'circle', 'clipPath', 'defs', 'ellipse', 'foreignObject', 'g', 'image', 'line',
   'linearGradient', 'marker', 'mask', 'path', 'pattern', 'polygon', 'polyline', 'radialGradient', 'rect', 'stop',
   'svg', 'text', 'tspan'
-];
+] as const;
 
 domElements.forEach(domElement => {
-  styled[domElement] = styled(domElement);
+  (styled as any)[domElement] = styled(domElement);
 });
 
 // Mock ThemeProvider
-const ThemeProvider = ({ children }: { children: React.ReactNode }) => children;
+const ThemeProvider: React.FC<{ theme: any; children: React.ReactNode }> = ({ children }) => {
+  return React.createElement(React.Fragment, null, children);
+};
 
 // Mock other styled-components exports
 const css = (...args: any[]) => '';
@@ -36,12 +52,11 @@ const keyframes = (...args: any[]) => '';
 const createGlobalStyle = (...args: any[]) => ({ globalStyle: null });
 const isStyledComponent = () => true;
 
-// Export all the styled-components exports
-module.exports = {
-  ...styled,
-  default: styled,
-  createGlobalStyle,
+export default styled;
+export {
+  ThemeProvider,
   css,
   keyframes,
-  ThemeProvider,
+  createGlobalStyle,
+  isStyledComponent
 };

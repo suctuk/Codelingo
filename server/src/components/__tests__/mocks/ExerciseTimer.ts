@@ -4,7 +4,7 @@ export class ExerciseTimer {
   private onTick: (timeLeft: number) => void;
   private onTimeUp: () => void;
   private onWarning: () => void;
-  private intervalId: NodeJS.Timeout | null = null;
+  private isTimerRunning: boolean = false;
 
   constructor({
     defaultTime,
@@ -26,36 +26,44 @@ export class ExerciseTimer {
     this.onWarning = onWarning;
   }
 
-  start() {
-    if (this.intervalId) return;
-    
-    this.intervalId = setInterval(() => {
-      this.timeLeft--;
-      this.onTick(this.timeLeft);
-      
-      if (this.timeLeft === this.warningTime) {
-        this.onWarning();
-      }
-      
-      if (this.timeLeft <= 0) {
-        this.stop();
-        this.onTimeUp();
-      }
-    }, 1000);
+  start(): void {
+    if (this.isTimerRunning) return;
+    this.isTimerRunning = true;
+    this.onTick(this.timeLeft);
   }
 
-  stop() {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-      this.intervalId = null;
-    }
+  stop(): void {
+    this.isTimerRunning = false;
   }
 
-  getTimeLeft() {
+  getTimeLeft(): number {
     return this.timeLeft;
   }
 
-  isRunning() {
-    return this.intervalId !== null;
+  isRunning(): boolean {
+    return this.isTimerRunning;
+  }
+
+  // Test helper methods
+  mockTick(): void {
+    if (!this.isTimerRunning) return;
+    this.timeLeft--;
+    this.onTick(this.timeLeft);
+    
+    if (this.timeLeft === this.warningTime) {
+      this.onWarning();
+    }
+    
+    if (this.timeLeft <= 0) {
+      this.stop();
+      this.onTimeUp();
+    }
+  }
+
+  mockTimeUp(): void {
+    if (!this.isTimerRunning) return;
+    this.timeLeft = 0;
+    this.stop();
+    this.onTimeUp();
   }
 }

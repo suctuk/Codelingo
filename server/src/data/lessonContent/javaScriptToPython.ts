@@ -1,208 +1,162 @@
-import { Section, SECTION_TEMPLATES } from './lessonStructure';
+import { LanguagePairCurriculum } from './curriculumTemplate';
+import { languageConfigs } from './languagePairFactory';
 
-export const javaScriptToPythonCurriculum = {
+export const javaScriptToPythonCurriculum: LanguagePairCurriculum = {
+  sourceLanguage: 'JavaScript',
+  targetLanguage: 'Python',
   sections: [
     {
-      ...SECTION_TEMPLATES.BASICS,
+      id: 'section_1_fundamentals',
+      title: 'Python Fundamentals for JavaScript Developers',
+      description: 'Learn Python basics coming from JavaScript',
       units: [
         {
-          id: 'unit_hello_world',
-          title: 'Hello World',
-          description: 'Learn to write your first Python program',
+          id: 'unit_1_1_output',
+          title: 'Console Output',
+          description: 'Learn how Python handles console output compared to JavaScript',
           lessons: [
             {
-              id: 'lesson_print',
-              title: 'Print Statements',
-              description: 'Learn how console.log() translates to print()',
-              exercises: [
-                {
-                  id: 'ex_print_1',
-                  type: 'matchCode',
-                  prompt: 'Match the JavaScript code with its Python equivalent',
-                  timeLimit: 30,
-                  difficulty: 'beginner',
-                  sourceCode: 'console.log("Hello, World!");',
-                  options: [
-                    'print("Hello, World!")',
-                    'printf("Hello, World!")',
-                    'echo("Hello, World!")',
-                    'System.out.println("Hello, World!")'
-                  ],
-                  correctAnswer: 'print("Hello, World!")',
-                  hints: ['In Python, we use print() instead of console.log()'],
-                  explanation: 'JavaScript uses console.log() for printing to the console, while Python uses the simpler print() function.',
-                  xpReward: 10
-                },
-                {
-                  id: 'ex_print_2',
-                  type: 'codeComplete',
-                  prompt: 'Complete the Python code to print "Hello!" (use the Python equivalent of console.log)',
-                  timeLimit: 30,
-                  difficulty: 'beginner',
-                  sourceCode: '___("Hello!")',
-                  correctAnswer: 'print',
-                  hints: ['Think about what replaces console.log in Python'],
-                  explanation: 'The print() function in Python is used for output, just like console.log() in JavaScript.',
-                  xpReward: 10
-                },
-                {
-                  id: 'ex_print_3',
-                  type: 'codeWrite',
-                  prompt: 'Convert this JavaScript code to Python:\nconsole.log("First line");\nconsole.log("Second line");',
-                  timeLimit: 60,
-                  difficulty: 'beginner',
-                  correctAnswer: [
-                    'print("First line")',
-                    'print("Second line")'
-                  ],
-                  hints: [
-                    'Each console.log becomes print',
-                    'Python doesn\'t use semicolons'
-                  ],
-                  explanation: 'In Python, we don\'t need semicolons at the end of lines, and we use print() instead of console.log().',
-                  xpReward: 15
-                }
-              ],
-              practiceExercises: [
-                {
-                  id: 'ex_print_practice_1',
-                  type: 'bugFix',
-                  prompt: 'Fix the Python code to match the JavaScript output:\n// JavaScript:\nconsole.log("Hello");\nconsole.log("World");\n\n# Python (broken):\nprint("Hello")\nprint World',
-                  timeLimit: 45,
-                  difficulty: 'beginner',
-                  correctAnswer: [
-                    'print("Hello")',
-                    'print("World")'
-                  ],
-                  hints: [
-                    'Check the string quotes',
-                    'Both print statements should follow the same format'
-                  ],
-                  explanation: 'String literals in Python need to be enclosed in quotes, just like in JavaScript.',
-                  xpReward: 12
-                }
-              ],
-              requiredXp: 0
+              id: 'lesson_1_1_1',
+              title: 'Hello World',
+              content: {
+                theory: 'In JavaScript, we use console.log() for output. Python uses the print() function.',
+                difficulty: 'beginner',
+                xpPoints: 10,
+                examples: [
+                  {
+                    source: 'console.log("Hello World");',
+                    target: 'print("Hello World")',
+                    explanation: 'Python\'s print() function is simpler - no semicolon needed!'
+                  },
+                  {
+                    source: 'console.log(42);',
+                    target: 'print(42)',
+                    explanation: 'Printing numbers works the same way in both languages'
+                  }
+                ],
+                exercises: [
+                  {
+                    type: 'code_conversion',
+                    question: 'Convert this JavaScript console.log to Python print',
+                    code: 'console.log("Welcome to Python!");',
+                    solution: 'print("Welcome to Python!")',
+                    hints: [
+                      'Python uses print instead of console.log',
+                      'Python doesn\'t use semicolons'
+                    ],
+                    xpReward: 5
+                  },
+                  {
+                    type: 'multiple_choice',
+                    question: 'Which is the correct way to print "Hello" in Python?',
+                    code: 'console.log("Hello");',
+                    solution: 'print("Hello")',
+                    hints: ['Look at the syntax differences'],
+                    xpReward: 5
+                  }
+                ]
+              },
+              prerequisites: [],
+              estimatedTime: 5
             },
             {
-              id: 'lesson_string_concat',
-              title: 'String Concatenation',
-              description: 'Learn how to join strings in Python vs JavaScript',
-              exercises: [
-                {
-                  id: 'ex_concat_1',
-                  type: 'multipleChoice',
-                  prompt: 'In JavaScript we write: console.log("Hello " + name);\nWhat\'s the Python equivalent?',
-                  timeLimit: 30,
-                  difficulty: 'beginner',
-                  options: [
-                    'print("Hello " + name)',
-                    'print("Hello", name)',
-                    'print("Hello".concat(name))',
-                    'print(f"Hello {name}")'
-                  ],
-                  correctAnswer: 'print(f"Hello {name}")',
-                  hints: ['Python has a special way to format strings using f-strings'],
-                  explanation: 'While JavaScript uses + for concatenation, Python\'s f-strings provide a more readable way to include variables in strings.',
-                  xpReward: 10
-                }
-              ],
-              practiceExercises: [],
-              requiredXp: 20
+              id: 'lesson_1_1_2',
+              title: 'Multiple Values',
+              content: {
+                theory: 'Python\'s print can handle multiple values with comma separation, while JavaScript needs concatenation or template literals.',
+                difficulty: 'beginner',
+                xpPoints: 15,
+                examples: [
+                  {
+                    source: 'console.log("Count:", 1, 2, 3);',
+                    target: 'print("Count:", 1, 2, 3)',
+                    explanation: 'Python automatically adds spaces between values'
+                  },
+                  {
+                    source: 'console.log(`${name} is ${age} years old`);',
+                    target: 'print(name, "is", age, "years old")',
+                    explanation: 'Python can mix strings and variables with commas'
+                  }
+                ],
+                exercises: [
+                  {
+                    type: 'code_conversion',
+                    question: 'Convert this JavaScript output to Python',
+                    code: 'console.log("Score:", score, "points");',
+                    solution: 'print("Score:", score, "points")',
+                    hints: [
+                      'Use commas to separate values',
+                      'Python adds spaces automatically'
+                    ],
+                    xpReward: 10
+                  }
+                ]
+              },
+              prerequisites: ['lesson_1_1_1'],
+              estimatedTime: 8
             }
           ],
-          quiz: [
-            {
-              id: 'quiz_hello_world_1',
-              type: 'codeWrite',
-              prompt: 'Convert this JavaScript code to Python:\nconsole.log("Hello " + firstName + " " + lastName);',
-              timeLimit: 60,
-              difficulty: 'beginner',
-              correctAnswer: [
-                'print(f"Hello {firstName} {lastName}")'
-              ],
-              hints: [
-                'Use an f-string',
-                'Variables go inside curly braces'
-              ],
-              explanation: 'Python\'s f-strings (formatted string literals) provide a cleaner way to include variables in strings compared to JavaScript\'s + concatenation.',
-              xpReward: 20
-            }
-          ],
-          requiredXp: 0
-        }
-      ]
-    },
-    {
-      ...SECTION_TEMPLATES.CONTROL_FLOW,
-      units: [
+          skillLevel: 'beginner',
+          xpToUnlock: 0
+        },
         {
-          id: 'unit_if_statements',
-          title: 'If Statements',
-          description: 'Learn how Python handles conditional logic',
+          id: 'unit_1_2_variables',
+          title: 'Variables and Types',
+          description: 'Learn how Python handles variables differently from JavaScript',
           lessons: [
             {
-              id: 'lesson_if_basic',
-              title: 'Basic If Statements',
-              description: 'Convert JavaScript if statements to Python',
-              exercises: [
-                {
-                  id: 'ex_if_1',
-                  type: 'matchCode',
-                  prompt: 'Match the JavaScript if statement with its Python equivalent',
-                  timeLimit: 45,
-                  difficulty: 'beginner',
-                  sourceCode: 'if (x > 0) {\n    console.log("Positive");\n}',
-                  options: [
-                    'if x > 0:\n    print("Positive")',
-                    'if (x > 0):\n    print("Positive")',
-                    'if x > 0 then\n    print("Positive")',
-                    'if x > 0 {\n    print("Positive")\n}'
-                  ],
-                  correctAnswer: 'if x > 0:\n    print("Positive")',
-                  hints: [
-                    'Python uses : instead of {}',
-                    'Python uses indentation for blocks',
-                    'Parentheses are optional in Python if statements'
-                  ],
-                  explanation: 'Python if statements use a colon and indentation instead of curly braces, and parentheses are optional.',
-                  xpReward: 15
-                }
-              ],
-              practiceExercises: [],
-              requiredXp: 30
+              id: 'lesson_1_2_1',
+              title: 'Variable Declaration',
+              content: {
+                theory: 'JavaScript uses let, const, and var for variables. Python just uses the name directly.',
+                difficulty: 'beginner',
+                xpPoints: 20,
+                examples: [
+                  {
+                    source: 'let name = "John";\nconst age = 30;',
+                    target: 'name = "John"\nage = 30',
+                    explanation: 'Python doesn\'t need declaration keywords'
+                  },
+                  {
+                    source: 'let count = 0;\ncount += 1;',
+                    target: 'count = 0\ncount += 1',
+                    explanation: 'Assignment operators work the same way'
+                  }
+                ],
+                exercises: [
+                  {
+                    type: 'code_conversion',
+                    question: 'Convert these JavaScript variables to Python',
+                    code: 'let x = 100;\nconst y = "hello";',
+                    solution: 'x = 100\ny = "hello"',
+                    hints: [
+                      'Remove let and const',
+                      'Remove semicolons'
+                    ],
+                    xpReward: 10
+                  }
+                ]
+              },
+              prerequisites: [],
+              estimatedTime: 10
             }
           ],
-          quiz: [],
-          requiredXp: 50
+          skillLevel: 'beginner',
+          xpToUnlock: 30
         }
-      ]
+      ],
+      requiredSections: []
     }
-    // Additional sections following SECTION_TEMPLATES...
-  ]
-} as const;
-
-// Helper function to get lesson by ID
-export function getLesson(lessonId: string) {
-  for (const section of javaScriptToPythonCurriculum.sections) {
-    for (const unit of section.units) {
-      const lesson = unit.lessons.find(l => l.id === lessonId);
-      if (lesson) return lesson;
-    }
+  ],
+  metadata: {
+    totalLessons: 300,
+    estimatedHours: 40,
+    difficulty: 'Beginner to Advanced',
+    prerequisites: ['Basic JavaScript knowledge'],
+    learningOutcomes: [
+      'Write Python code confidently',
+      'Understand key differences between JavaScript and Python',
+      'Build Python applications using JavaScript knowledge'
+    ]
   }
-  return null;
-}
-
-// Helper function to get next lesson
-export function getNextLesson(currentLessonId: string) {
-  let foundCurrent = false;
-  for (const section of javaScriptToPythonCurriculum.sections) {
-    for (const unit of section.units) {
-      for (const lesson of unit.lessons) {
-        if (foundCurrent) return lesson;
-        if (lesson.id === currentLessonId) foundCurrent = true;
-      }
-    }
-  }
-  return null;
-}
+};
