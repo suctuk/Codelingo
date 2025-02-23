@@ -29,3 +29,9 @@
   *.swn
   .DS_Store
 node_modules
+
+# macOS system files
+.DS_Store
+
+# IntelliJ/WebStorm/IDEA config files
+.idea/

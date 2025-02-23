@@ -1,14 +1,14 @@
-FROM node:18
-
+# Build Stage
+FROM node:18 as build
 WORKDIR /app
-
-COPY client/package*.json ./
-
+COPY client/package.json client/package-lock.json ./
 RUN npm install
-RUN npm install --save-dev @babel/plugin-proposal-private-property-in-object@7.21.11
-
 COPY client/ ./
+RUN npm run build
 
-EXPOSE 3000
-
-CMD ["npm", "start"]
+# Serve Stage
+FROM node:18 as serve
+WORKDIR /app
+RUN npm install -g serve
+COPY --from=build /app/build /app/build
+CMD ["serve", "-s", "build", "-l", "3000"]

@@ -1,0 +1,106 @@
+.
+├── LICENSE
+├── README.md
+├── client
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── public
+│   │   ├── favicon.ico
+│   │   ├── index.html
+│   │   └── manifest.json
+│   ├── src
+│   │   ├── App.jsx
+│   │   ├── components
+│   │   │   ├── AppLayout.jsx
+│   │   │   ├── LearningPath.jsx
+│   │   │   ├── OnboardingFlow.jsx
+│   │   │   ├── auth
+│   │   │   │   ├── LoginForm.jsx
+│   │   │   │   ├── PrivateRoute.jsx
+│   │   │   │   └── RegisterForm.jsx
+│   │   │   ├── layout
+│   │   │   │   ├── AppLayout.jsx
+│   │   │   │   └── Navbar.jsx
+│   │   │   ├── learning
+│   │   │   │   └── LearningPath.jsx
+│   │   │   ├── onboarding
+│   │   │   │   └── OnboardingFlow.jsx
+│   │   │   └── ui
+│   │   │       └── alert.jsx
+│   │   ├── contexts
+│   │   │   └── AuthContext.jsx
+│   │   ├── hooks
+│   │   │   ├── useAuth.js
+│   │   │   └── useSocket.js
+│   │   ├── index.jsx
+│   │   ├── pages
+│   │   │   ├── Home.jsx
+│   │   │   ├── Learn.jsx
+│   │   │   ├── Login.jsx
+│   │   │   ├── Profile.jsx
+│   │   │   └── Register.jsx
+│   │   ├── services
+│   │   │   ├── api.js
+│   │   │   └── socket.js
+│   │   ├── styles
+│   │   │   └── tailwind.css
+│   │   └── utils
+│   │       └── helpers.js
+│   └── tailwind.config.js
+├── docker
+│   ├── client.Dockerfile
+│   ├── docker-compose.yml
+│   └── server.Dockerfile
+├── docs
+│   ├── api
+│   │   └── README.md
+│   ├── deployment
+│   │   └── README.md
+│   └── development
+│       └── getting-started.md
+├── package-lock.json
+├── package.json
+├── project-structure.txt
+├── server
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── scripts
+│   │   ├── db-setup.sql
+│   │   └── docker-entrypoint.sh
+│   ├── src
+│   │   ├── app.js
+│   │   ├── config
+│   │   │   ├── database.js
+│   │   │   └── redis.js
+│   │   ├── middleware
+│   │   │   ├── auth.js
+│   │   │   ├── error.js
+│   │   │   └── rateLimiter.js
+│   │   ├── models
+│   │   │   ├── Lesson.js
+│   │   │   └── User.js
+│   │   ├── server.js
+│   │   ├── services
+│   │   │   ├── auth
+│   │   │   │   └── index.js
+│   │   │   ├── gamification
+│   │   │   │   └── index.js
+│   │   │   ├── learning
+│   │   │   │   └── index.js
+│   │   │   ├── social
+│   │   │   │   └── index.js
+│   │   │   ├── subscription
+│   │   │   │   └── index.js
+│   │   │   └── user
+│   │   │       └── index.js
+│   │   └── utils
+│   │       ├── logger.js
+│   │       └── validation.js
+│   └── tests
+│       ├── integration
+│       │   └── auth.test.js
+│       └── unit
+│           └── user.test.js
+└── tree.txt
+
+38 directories, 66 files
