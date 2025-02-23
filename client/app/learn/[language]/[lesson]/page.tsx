@@ -75,7 +75,10 @@ export default function LessonPage({ params }: PageProps) {
           <div className="border-t border-slate-200 pt-8">
             <h2 className="text-2xl font-bold text-slate-900 mb-4">Exercise</h2>
             <Suspense fallback={<div className="animate-pulse bg-slate-200 h-32 rounded-lg"></div>}>
-              <LessonExercise exercise={lessonData.exercise} />
+              <LessonExercise 
+                exercise={lessonData.exercise}
+                template={typeof lessonData.exercise === 'string' ? lessonData.template : undefined}
+              />
             </Suspense>
           </div>
 
