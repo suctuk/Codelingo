@@ -1,8 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import Link from "next/link";
+import { UnitSection } from "@/components/unit-section";
+import { UserProgress } from "@/components/user-progress";
 
 interface PageProps {
   params: {
@@ -13,141 +12,159 @@ interface PageProps {
 const languages: Record<string, {
   name: string;
   icon: string;
-  lessons: Array<{
+  units: Array<{
     title: string;
     description: string;
-    completed: boolean;
-    slug: string;
+    sections: Array<{
+      title: string;
+      isCompleted: boolean;
+      lessons: Array<{
+        type: "concept" | "practice" | "challenge";
+        status: "locked" | "available" | "completed";
+        title: string;
+        slug: string;
+        xp: number;
+      }>;
+    }>;
   }>;
 }> = {
   python: {
     name: "Python",
     icon: "/python.svg",
-    lessons: [
+    units: [
       {
-        title: "Variables and Data Types",
-        description: "Learn about variables, strings, numbers, and basic data types in Python",
-        completed: false,
-        slug: "variables-and-data-types"
+        title: "Unit 1",
+        description: "Basic Concepts",
+        sections: [
+          {
+            title: "Print Statements",
+            isCompleted: true,
+            lessons: [
+              { type: "concept", status: "completed", title: "Introduction to Print", slug: "print-intro", xp: 10 },
+              { type: "practice", status: "completed", title: "Print Practice", slug: "print-practice", xp: 15 },
+              { type: "challenge", status: "completed", title: "Print Challenge", slug: "print-challenge", xp: 20 },
+            ],
+          },
+          {
+            title: "Variables",
+            isCompleted: false,
+            lessons: [
+              { type: "concept", status: "available", title: "Variable Basics", slug: "variables-and-data-types", xp: 10 },
+              { type: "practice", status: "locked", title: "Variable Practice", slug: "variable-practice", xp: 15 },
+              { type: "challenge", status: "locked", title: "Variable Challenge", slug: "variable-challenge", xp: 20 },
+            ],
+          },
+        ],
       },
       {
-        title: "Control Flow",
-        description: "Master if statements, loops, and control structures",
-        completed: false,
-        slug: "control-flow"
-      },
-      {
-        title: "Functions",
-        description: "Learn how to create and use functions in Python",
-        completed: false,
-        slug: "functions"
+        title: "Unit 2",
+        description: "Control Flow",
+        sections: [
+          {
+            title: "Conditionals",
+            isCompleted: false,
+            lessons: [
+              { type: "concept", status: "locked", title: "If Statements", slug: "control-flow", xp: 10 },
+              { type: "practice", status: "locked", title: "If-Else Practice", slug: "if-else-practice", xp: 15 },
+              { type: "challenge", status: "locked", title: "Conditionals Challenge", slug: "conditionals-challenge", xp: 20 },
+            ],
+          },
+          {
+            title: "Loops",
+            isCompleted: false,
+            lessons: [
+              { type: "concept", status: "locked", title: "For Loops", slug: "for-loops", xp: 10 },
+              { type: "practice", status: "locked", title: "Loop Practice", slug: "loop-practice", xp: 15 },
+              { type: "challenge", status: "locked", title: "Loop Challenge", slug: "loop-challenge", xp: 20 },
+            ],
+          },
+        ],
       },
     ],
   },
   javascript: {
     name: "JavaScript",
     icon: "/javascript.svg",
-    lessons: [
+    units: [
       {
-        title: "Variables and Data Types",
-        description: "Learn about variables, strings, numbers, and basic data types in JavaScript",
-        completed: false,
-        slug: "variables-and-data-types"
-      },
-      {
-        title: "Control Flow",
-        description: "Master if statements, loops, and control structures",
-        completed: false,
-        slug: "control-flow"
-      },
-      {
-        title: "Functions",
-        description: "Learn how to create and use functions in JavaScript",
-        completed: false,
-        slug: "functions"
-      },
-    ],
-  },
-  java: {
-    name: "Java",
-    icon: "/java.svg",
-    lessons: [
-      {
-        title: "Variables and Data Types",
-        description: "Learn about variables, strings, numbers, and basic data types in Java",
-        completed: false,
-        slug: "variables-and-data-types"
-      },
-      {
-        title: "Control Flow",
-        description: "Master if statements, loops, and control structures",
-        completed: false,
-        slug: "control-flow"
-      },
-      {
-        title: "Functions and Methods",
-        description: "Learn how to create and use methods in Java",
-        completed: false,
-        slug: "functions"
+        title: "Unit 1",
+        description: "Basic Concepts",
+        sections: [
+          {
+            title: "Variables",
+            isCompleted: false,
+            lessons: [
+              { type: "concept", status: "available", title: "Variable Basics", slug: "variables-and-data-types", xp: 10 },
+              { type: "practice", status: "locked", title: "Variable Practice", slug: "variable-practice", xp: 15 },
+              { type: "challenge", status: "locked", title: "Variable Challenge", slug: "variable-challenge", xp: 20 },
+            ],
+          },
+        ],
       },
     ],
   },
 };
 
 export default function LearnPage({ params }: PageProps) {
-  const language = languages[params.language.toLowerCase()];
+  const language = params.language.toLowerCase();
+  const languageData = languages[language];
 
-  if (!language) {
+  if (!languageData) {
     notFound();
   }
 
-  const progress = 0; // This will be connected to the backend later
-
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="mb-8">
-        <div className="flex items-center gap-4 mb-4">
+      <div className="mb-8 flex items-center gap-4">
+        <div className="h-16 w-16 relative">
           <Image
-            src={language.icon}
-            alt={language.name}
-            width={48}
-            height={48}
-            className="h-12 w-12"
+            src={languageData.icon}
+            alt={languageData.name}
+            fill
+            className="object-contain"
           />
-          <h1 className="text-3xl font-bold text-slate-900">
-            Learning {language.name}
-          </h1>
         </div>
-        <Progress value={progress} className="h-3 w-full" />
-        <p className="mt-2 text-sm text-slate-600">
-          {progress}% Complete
-        </p>
+        <div>
+          <h1 className="text-2xl font-bold text-slate-900">
+            {languageData.name} Course
+          </h1>
+          <p className="text-slate-500">Master the basics of {languageData.name}</p>
+        </div>
       </div>
 
-      <div className="grid gap-4">
-        {language.lessons.map((lesson, index) => (
-          <div
-            key={index}
-            className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm"
-          >
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="text-xl font-semibold text-slate-900">
-                  {lesson.title}
-                </h3>
-                <p className="mt-1 text-slate-600">{lesson.description}</p>
-              </div>
-              <Link 
-                href={`/learn/${params.language}/${lesson.slug}`}
-                className="ml-4"
-              >
-                <Button>
-                  {lesson.completed ? "Review" : "Start"}
-                </Button>
-              </Link>
+      <div className="space-y-12">
+        {languageData.units.map((unit, unitIndex) => (
+          <div key={unitIndex} className="space-y-6">
+            <div className="space-y-1">
+              <h2 className="text-xl font-bold text-slate-900">{unit.title}</h2>
+              <p className="text-slate-500">{unit.description}</p>
+            </div>
+
+            <div className="space-y-4">
+              {unit.sections.map((section, sectionIndex) => (
+                <UnitSection
+                  key={sectionIndex}
+                  title={section.title}
+                  language={language}
+                  lessons={section.lessons}
+                  isCompleted={section.isCompleted}
+                />
+              ))}
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="mt-8">
+        <UserProgress
+          hearts={5}
+          maxHearts={5}
+          streak={3}
+          gems={100}
+          xp={150}
+          dailyGoal={200}
+          dailyProgress={150}
+        />
       </div>
     </div>
   );
